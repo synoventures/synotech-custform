@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Inter:wght@600;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* ── Reset & Full‑Page Glass Base ── */
+    /* ── Reset & Base ── */
     * {
       margin: 0;
       padding: 0;
@@ -24,7 +24,7 @@
       width: 100%;
       font-family: 'DM Sans', sans-serif;
       color: #294582;
-      background: #f0f0f0;
+      background: #F9FBFE; /* Updated to match iframe background */
     }
 
     body {
@@ -32,48 +32,41 @@
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
-      /* ── Full‑page glassmorphism ── */
-      background: rgba(255, 255, 255, 0.55);
-      backdrop-filter: blur(14px) saturate(180%);
-      -webkit-backdrop-filter: blur(14px) saturate(180%);
-      border: none;
-      box-shadow: none;
     }
 
-    /* ── Content wrapper: keeps form readable, but background is full‑page ── */
-    .content {
-      max-width: 36rem;  /* ~576px */
+    /* ── Glassmorphism Card ── */
+    .glass-card {
+      max-width: 36rem;
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      padding: 2.5rem 2.25rem;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      border-radius: 1.875rem;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.12);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .glass-card:hover {
+      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.16);
     }
 
     /* ── Logo ── */
     .logo-wrapper {
       text-align: center;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
     }
 
     .logo-wrapper img {
-      max-width: 11.25rem; /* 180px */
+      max-width: 11.25rem;
       height: auto;
       display: inline-block;
     }
 
     /* ── Typography ── */
-    h1 {
-      font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-weight: 700;
-      font-size: 1.75rem; /* 28px */
-      color: #294582;
-      text-align: center;
-      letter-spacing: -0.01875rem;
-      margin-bottom: 0.25rem;
-    }
-
     .subtitle {
-      font-size: 0.9375rem; /* 15px */
+      font-size: 0.9375rem;
       color: #294582;
       opacity: 0.85;
       text-align: center;
@@ -82,49 +75,69 @@
       line-height: 1.4;
     }
 
-    /* ── Language Toggle ── */
-    .lang-toggle {
+    /* ── Language Slider Toggle ── */
+    .toggle-container {
       display: flex;
+      align-items: center;
       justify-content: center;
-      gap: 0.625rem;
-      margin-bottom: 1.625rem;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
     }
 
-    .lang-toggle button {
-      padding: 0.375rem 1.375rem;
-      border: 0.125rem solid rgba(41, 69, 130, 0.25);
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(4px);
-      border-radius: 1.875rem;
-      cursor: pointer;
+    .toggle-label {
       font-weight: 600;
-      font-size: 0.875rem; /* 14px */
-      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
       color: #294582;
-      transition: all 0.2s;
+      opacity: 0.4;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+      user-select: none;
     }
 
-    .lang-toggle button.active {
+    .toggle-label.active {
+      opacity: 1;
+    }
+
+    .toggle-switch {
+      width: 3.75rem;  /* 60px */
+      height: 1.875rem; /* 30px */
+      background: #cbd5e0;
+      border-radius: 1.875rem;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .toggle-switch.active {
       background: #294582;
-      border-color: #294582;
-      color: #f0f0f0;
-      box-shadow: 0 0.25rem 0.75rem rgba(41, 69, 130, 0.25);
     }
 
-    .lang-toggle button:hover:not(.active) {
-      background: rgba(41, 69, 130, 0.08);
-      border-color: rgba(41, 69, 130, 0.5);
+    .toggle-slider {
+      width: 1.625rem;  /* 26px */
+      height: 1.625rem;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 0.125rem;
+      left: 0.125rem;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+    }
+
+    .toggle-switch.active .toggle-slider {
+      transform: translateX(1.875rem); /* moves to the right */
     }
 
     /* ── Form Fields ── */
     .form-group {
-      margin-bottom: 1.125rem; /* 18px */
+      margin-bottom: 1.125rem;
     }
 
     .form-group label {
       display: block;
       font-weight: 600;
-      font-size: 0.875rem; /* 14px */
+      font-size: 0.875rem;
       color: #294582;
       margin-bottom: 0.3125rem;
       letter-spacing: 0.0125rem;
@@ -139,10 +152,10 @@
     .form-group select,
     .form-group textarea {
       width: 100%;
-      padding: 0.75rem 1rem; /* 12px 16px */
+      padding: 0.75rem 1rem;
       border: 0.125rem solid rgba(41, 69, 130, 0.15);
-      border-radius: 1.875rem; /* 30px */
-      font-size: 0.9375rem; /* 15px */
+      border-radius: 1.875rem;
+      font-size: 0.9375rem;
       font-family: 'DM Sans', sans-serif;
       background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(4px);
@@ -167,8 +180,8 @@
 
     .form-group textarea {
       resize: vertical;
-      min-height: 5.625rem; /* 90px */
-      border-radius: 1.5rem; /* 24px */
+      min-height: 5.625rem;
+      border-radius: 1.5rem;
     }
 
     .form-group select {
@@ -182,12 +195,12 @@
     /* ── Submit Button ── */
     .submit-btn {
       width: 100%;
-      padding: 0.9375rem; /* 15px */
+      padding: 0.9375rem;
       background: #294582;
       color: #f0f0f0;
       border: none;
-      border-radius: 1.875rem; /* 30px */
-      font-size: 1.125rem; /* 18px */
+      border-radius: 1.875rem;
+      font-size: 1.125rem;
       font-weight: 700;
       font-family: 'DM Sans', sans-serif;
       cursor: pointer;
@@ -212,7 +225,7 @@
 
     .footnote {
       text-align: center;
-      font-size: 0.875rem; /* 14px */
+      font-size: 0.875rem;
       color: rgba(41, 69, 130, 0.7);
       margin-top: 0.875rem;
       font-weight: 400;
@@ -252,29 +265,29 @@
       border: 0.0625rem solid rgba(41, 69, 130, 0.15);
     }
 
-    /* ── Responsive fine‑tune ── */
-    @media (max-width: 32.5rem) { /* 520px */
+    /* ── Responsive ── */
+    @media (max-width: 32.5rem) {
       body {
         padding: 1rem;
       }
-      h1 {
-        font-size: 1.5rem;
+      .glass-card {
+        padding: 1.75rem 1.125rem;
       }
       .submit-btn {
         font-size: 1rem;
         padding: 0.8125rem;
       }
       .logo-wrapper img {
-        max-width: 8.75rem; /* 140px */
+        max-width: 8.75rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="content">
+  <div class="glass-card">
 
-    <!-- Logo -->
+    <!-- ─── Logo ─── -->
     <div class="logo-wrapper">
       <img
         src="https://hitpay-production.s3.ap-southeast-1.amazonaws.com/logos/logo-blue-follow-shape-6a2db3e7ac364.png"
@@ -282,17 +295,20 @@
       />
     </div>
 
-    <h1 id="pageTitle">Send Your Device</h1>
+    <!-- ─── Subtitle (title removed) ─── -->
     <p class="subtitle" id="pageSubtitle">Fill in the form below and we'll contact you for a free check-up.</p>
 
-    <!-- Language Toggle -->
-    <div class="lang-toggle">
-      <button id="langEn" class="active" onclick="setLanguage('en')">🇬🇧 English</button>
-      <button id="langMs" onclick="setLanguage('ms')">🇲🇾 Bahasa Melayu</button>
+    <!-- ─── Language Slider Toggle ─── -->
+    <div class="toggle-container">
+      <span class="toggle-label active" id="labelEn">EN</span>
+      <div class="toggle-switch active" id="langToggle" onclick="toggleLanguage()">
+        <div class="toggle-slider"></div>
+      </div>
+      <span class="toggle-label" id="labelMs">MS</span>
     </div>
 
-    <!-- Form -->
-    <form id="customerForm" onsubmit="submitForm(event)" style="width:100%;">
+    <!-- ─── Form ─── -->
+    <form id="customerForm" onsubmit="submitForm(event)">
 
       <div class="form-group">
         <label id="lblName">Full Name <span class="required">*</span></label>
@@ -348,7 +364,6 @@
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     const translations = {
       en: {
-        title: 'Send Your Device',
         subtitle: 'Fill in the form below and we\'ll contact you for a free check-up.',
         name: 'Full Name',
         phone: 'Phone Number',
@@ -368,7 +383,6 @@
         required: '*'
       },
       ms: {
-        title: 'Hantar Peranti Anda',
         subtitle: 'Isi borang di bawah dan kami akan hubungi anda untuk pemeriksaan percuma.',
         name: 'Nama Penuh',
         phone: 'Nombor Telefon',
@@ -391,14 +405,32 @@
 
     let currentLang = 'en';
 
+    // ─── Language Slider Logic ───
+    function toggleLanguage() {
+      const newLang = currentLang === 'en' ? 'ms' : 'en';
+      setLanguage(newLang);
+    }
+
     function setLanguage(lang) {
       currentLang = lang;
       const t = translations[lang];
 
-      document.getElementById('langEn').className = lang === 'en' ? 'active' : '';
-      document.getElementById('langMs').className = lang === 'ms' ? 'active' : '';
+      // Update toggle switch UI
+      const toggle = document.getElementById('langToggle');
+      const labelEn = document.getElementById('labelEn');
+      const labelMs = document.getElementById('labelMs');
 
-      document.getElementById('pageTitle').textContent = t.title;
+      if (lang === 'en') {
+        toggle.classList.add('active');
+        labelEn.classList.add('active');
+        labelMs.classList.remove('active');
+      } else {
+        toggle.classList.remove('active');
+        labelEn.classList.remove('active');
+        labelMs.classList.add('active');
+      }
+
+      // Update text content
       document.getElementById('pageSubtitle').textContent = t.subtitle;
       document.getElementById('footnote').textContent = t.footnote;
 
@@ -417,6 +449,7 @@
       const select = document.getElementById('deviceType');
       select.options[0].text = t.selectDefault;
 
+      // Clear status
       const status = document.getElementById('status');
       status.style.display = 'none';
       status.className = '';
@@ -489,7 +522,7 @@
     }
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    //  🚀  INIT
+    //  🚀  INIT — default English
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     setLanguage('en');
   </script>
