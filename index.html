@@ -1,1 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Synotech Computer – Send Your Device</title>
 
+  <!-- Google Fonts: SF Pro (approximated with Inter) & DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Inter:wght@600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Base ── */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      font-family: 'DM Sans', sans-serif;
+      background: #f0f0f0;
+      color: #294582;
+    }
+
+    /* ── Glassmorphism Container ── */
+    .glass-card {
+      max-width: 580px;
+      width: 100%;
+      padding: 40px 36px;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .glass-card:hover {
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.16);
+    }
+
+    /* ── Typography ── */
+    h1 {
+      font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      color: #294582;
+      text-align: center;
+      letter-spacing: -0.3px;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: #294582;
+      opacity: 0.85;
+      text-align: center;
+      margin-bottom: 28px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    /* ── Language Toggle ── */
+    .lang-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    .lang-toggle button {
+      padding: 6px 22px;
+      border: 2px solid rgba(41, 69, 130, 0.25);
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(4px);
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      color: #294582;
+      transition: all 0.2s;
+    }
+
+    .lang-toggle button.active {
+      background: #294582;
+      border-color: #294582;
+      color: #f0f0f0;
+      box-shadow: 0 4px 12px rgba(41, 69, 130, 0.25);
+    }
+
+    .lang-toggle button:hover:not(.active) {
+      background: rgba(41, 69, 130, 0.08);
+      border-color: rgba(41, 69, 130, 0.5);
+    }
+
+    /* ── Form Fields ── */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      color: #294582;
+      margin-bottom: 5px;
+      letter-spacing: 0.2px;
+    }
+
+    .form-group label .required {
+      color: #e53e3e;
+      margin-left: 2px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid rgba(41, 69, 130, 0.15);
+      border-radius: 30px;
+      font-size: 15px;
+      font-family: 'DM Sans', sans-serif;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(4px);
+      color: #294582;
+      transition: 0.25s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #294582;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 0 0 4px rgba(41, 69, 130, 0.12);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(41, 69, 130, 0.5);
+      font-weight: 400;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 90px;
+      border-radius: 24px;
+    }
+
+    .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23294582' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+
+    /* ── Submit Button ── */
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: #294582;
+      color: #f0f0f0;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: 0.25s;
+      margin-top: 6px;
+      box-shadow: 0 6px 20px rgba(41, 69, 130, 0.25);
+      letter-spacing: 0.3px;
+    }
+
+    .submit-btn:hover {
+      background: #1d3568;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(41, 69, 130, 0.35);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .footnote {
+      text-align: center;
+      font-size: 14px;
+      color: rgba(41, 69, 130, 0.7);
+      margin-top: 14px;
+      font-weight: 400;
+    }
+
+    /* ── Status Messages ── */
+    #status {
+      margin-top: 18px;
+      padding: 12px 18px;
+      border-radius: 30px;
+      font-weight: 500;
+      font-size: 14px;
+      display: none;
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+
+    #status.success {
+      display: block;
+      background: rgba(56, 161, 105, 0.15);
+      color: #276749;
+      border: 1px solid rgba(56, 161, 105, 0.3);
+    }
+
+    #status.error {
+      display: block;
+      background: rgba(229, 62, 62, 0.12);
+      color: #9b2c2c;
+      border: 1px solid rgba(229, 62, 62, 0.25);
+    }
+
+    #status.loading {
+      display: block;
+      background: rgba(41, 69, 130, 0.08);
+      color: #294582;
+      border: 1px solid rgba(41, 69, 130, 0.15);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 520px) {
+      .glass-card {
+        padding: 28px 18px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      .submit-btn {
+        font-size: 16px;
+        padding: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="glass-card">
+
+  <h1 id="pageTitle">📱 Send Your Device</h1>
+  <p class="subtitle" id="pageSubtitle">Fill in the form below and we'll contact you for a free check-up.</p>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button id="langEn" class="active" onclick="setLanguage('en')">🇬🇧 English</button>
+    <button id="langMs" onclick="setLanguage('ms')">🇲🇾 Bahasa Melayu</button>
+  </div>
+
+  <!-- Form -->
+  <form id="customerForm" onsubmit="submitForm(event)">
+
+    <div class="form-group">
+      <label id="lblName">Full Name <span class="required">*</span></label>
+      <input type="text" id="name" placeholder="e.g. Ahmad bin Abdullah" required />
+    </div>
+
+    <div class="form-group">
+      <label id="lblPhone">Phone Number <span class="required">*</span></label>
+      <input type="tel" id="phone" placeholder="e.g. 012-3456789" required />
+    </div>
+
+    <div class="form-group">
+      <label id="lblAddress">Address <span class="required">*</span></label>
+      <input type="text" id="address" placeholder="e.g. No. 12, Jalan SS2/72, 47300 Petaling Jaya" required />
+    </div>
+
+    <div class="form-group">
+      <label id="lblDevice">Device Type <span class="required">*</span></label>
+      <select id="deviceType" required>
+        <option value="">— Please select / Sila pilih —</option>
+        <option value="Laptop">Laptop</option>
+        <option value="Desktop">Desktop / Komputer Meja</option>
+        <option value="Tablet">Tablet</option>
+        <option value="Smartphone">Smartphone / Telefon Pintar</option>
+        <option value="Printer">Printer / Pencetak</option>
+        <option value="Network">Network / Rangkaian</option>
+        <option value="Other">Other / Lain-lain</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label id="lblIssue">Issue / Problem <span class="required">*</span></label>
+      <textarea id="issue" placeholder="Describe the issue you're facing..." required></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn" id="submitBtn">📩 Send &amp; Get Quotation</button>
+    <p class="footnote" id="footnote">We'll reply within 24 hours.</p>
+  </form>
+
+  <div id="status"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  SUPABASE + FORM LOGIC                            -->
+<!-- ═══════════════════════════════════════════════════ -->
+<script>
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  //  🔐  YOUR SUPABASE CREDENTIALS
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  const SUPABASE_URL = 'https://jsbqtgxnayayerhkaqvr.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_t2g8YD1YhyYa-fYbR0ov8g_FErcKunR';
+
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  //  🌐  BILINGUAL DICTIONARY
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  const translations = {
+    en: {
+      title: '📱 Send Your Device',
+      subtitle: 'Fill in the form below and we\'ll contact you for a free check-up.',
+      name: 'Full Name',
+      phone: 'Phone Number',
+      address: 'Address',
+      device: 'Device Type',
+      issue: 'Issue / Problem',
+      submit: '📩 Send & Get Quotation',
+      footnote: 'We\'ll reply within 24 hours.',
+      placeholderName: 'e.g. Ahmad bin Abdullah',
+      placeholderPhone: 'e.g. 012-3456789',
+      placeholderAddress: 'e.g. No. 12, Jalan SS2/72, 47300 Petaling Jaya',
+      placeholderIssue: 'Describe the issue you\'re facing...',
+      selectDefault: '— Please select —',
+      success: '✅ Thank you! Your information has been submitted successfully.',
+      error: '❌ Something went wrong. Please try again.',
+      loading: '⏳ Submitting... please wait.',
+      required: '*'
+    },
+    ms: {
+      title: '📱 Hantar Peranti Anda',
+      subtitle: 'Isi borang di bawah dan kami akan hubungi anda untuk pemeriksaan percuma.',
+      name: 'Nama Penuh',
+      phone: 'Nombor Telefon',
+      address: 'Alamat',
+      device: 'Jenis Peranti',
+      issue: 'Isu / Masalah',
+      submit: '📩 Hantar & Dapatkan Sebut Harga',
+      footnote: 'Kami akan balas dalam masa 24 jam.',
+      placeholderName: 'cth. Ahmad bin Abdullah',
+      placeholderPhone: 'cth. 012-3456789',
+      placeholderAddress: 'cth. No. 12, Jalan SS2/72, 47300 Petaling Jaya',
+      placeholderIssue: 'Terangkan masalah yang anda hadapi...',
+      selectDefault: '— Sila pilih —',
+      success: '✅ Terima kasih! Maklumat anda telah berjaya dihantar.',
+      error: '❌ Terdapat ralat. Sila cuba lagi.',
+      loading: '⏳ Menghantar... sila tunggu.',
+      required: '*'
+    }
+  };
+
+  let currentLang = 'en';
+
+  function setLanguage(lang) {
+    currentLang = lang;
+    const t = translations[lang];
+
+    document.getElementById('langEn').className = lang === 'en' ? 'active' : '';
+    document.getElementById('langMs').className = lang === 'ms' ? 'active' : '';
+
+    document.getElementById('pageTitle').textContent = t.title;
+    document.getElementById('pageSubtitle').textContent = t.subtitle;
+    document.getElementById('footnote').textContent = t.footnote;
+
+    document.getElementById('lblName').innerHTML = t.name + ' <span class="required">' + t.required + '</span>';
+    document.getElementById('lblPhone').innerHTML = t.phone + ' <span class="required">' + t.required + '</span>';
+    document.getElementById('lblAddress').innerHTML = t.address + ' <span class="required">' + t.required + '</span>';
+    document.getElementById('lblDevice').innerHTML = t.device + ' <span class="required">' + t.required + '</span>';
+    document.getElementById('lblIssue').innerHTML = t.issue + ' <span class="required">' + t.required + '</span>';
+
+    document.getElementById('submitBtn').textContent = t.submit;
+    document.getElementById('name').placeholder = t.placeholderName;
+    document.getElementById('phone').placeholder = t.placeholderPhone;
+    document.getElementById('address').placeholder = t.placeholderAddress;
+    document.getElementById('issue').placeholder = t.placeholderIssue;
+
+    const select = document.getElementById('deviceType');
+    select.options[0].text = t.selectDefault;
+
+    const status = document.getElementById('status');
+    status.style.display = 'none';
+    status.className = '';
+  }
+
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  //  📤  FORM SUBMISSION
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  async function submitForm(event) {
+    event.preventDefault();
+
+    const t = translations[currentLang];
+    const status = document.getElementById('status');
+    const btn = document.getElementById('submitBtn');
+
+    const formData = {
+      name: document.getElementById('name').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      address: document.getElementById('address').value.trim(),
+      device_type: document.getElementById('deviceType').value,
+      issue: document.getElementById('issue').value.trim()
+    };
+
+    // Validate all required
+    if (!formData.name || !formData.phone || !formData.address || !formData.device_type || !formData.issue) {
+      status.className = 'error';
+      status.textContent = '⚠️ ' + (currentLang === 'en' ?
+        'Please fill in all required fields.' :
+        'Sila lengkapkan semua maklumat yang diperlukan.');
+      status.style.display = 'block';
+      return;
+    }
+
+    status.className = 'loading';
+    status.textContent = t.loading;
+    status.style.display = 'block';
+    btn.disabled = true;
+
+    try {
+      const response = await fetch(SUPABASE_URL + '/rest/v1/customers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || 'HTTP ' + response.status);
+      }
+
+      status.className = 'success';
+      status.textContent = t.success;
+      status.style.display = 'block';
+      document.getElementById('customerForm').reset();
+
+    } catch (err) {
+      console.error('Supabase insert error:', err);
+      status.className = 'error';
+      status.textContent = t.error + ' ' + (currentLang === 'en' ?
+        'Error: ' + err.message :
+        'Ralat: ' + err.message);
+      status.style.display = 'block';
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  //  🚀  INIT
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  setLanguage('en');
+</script>
+
+</body>
+</html>
