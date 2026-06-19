@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Synotech Computer – Send Your Device</title>
 
-  <!-- Google Fonts: SF Pro (approximated with Inter) & DM Sans -->
+  <!-- Google Fonts: SF Pro (Inter) & DM Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Inter:wght@600;700&display=swap" rel="stylesheet" />
@@ -45,6 +45,18 @@
 
     .glass-card:hover {
       box-shadow: 0 16px 48px rgba(0, 0, 0, 0.16);
+    }
+
+    /* ── Logo ── */
+    .logo-wrapper {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .logo-wrapper img {
+      max-width: 180px;
+      height: auto;
+      display: inline-block;
     }
 
     /* ── Typography ── */
@@ -249,6 +261,9 @@
         font-size: 16px;
         padding: 13px;
       }
+      .logo-wrapper img {
+        max-width: 140px;
+      }
     }
   </style>
 </head>
@@ -256,7 +271,15 @@
 
 <div class="glass-card">
 
-  <h1 id="pageTitle">📱 Send Your Device</h1>
+  <!-- ─── Logo ─── -->
+  <div class="logo-wrapper">
+    <img
+      src="https://hitpay-production.s3.ap-southeast-1.amazonaws.com/logos/logo-blue-follow-shape-6a2db3e7ac364.png"
+      alt="Synotech Computer Logo"
+    />
+  </div>
+
+  <h1 id="pageTitle">Send Your Device</h1>
   <p class="subtitle" id="pageSubtitle">Fill in the form below and we'll contact you for a free check-up.</p>
 
   <!-- Language Toggle -->
@@ -289,8 +312,6 @@
         <option value="">— Please select / Sila pilih —</option>
         <option value="Laptop">Laptop</option>
         <option value="Desktop">Desktop / Komputer Meja</option>
-        <option value="Tablet">Tablet</option>
-        <option value="Smartphone">Smartphone / Telefon Pintar</option>
         <option value="Printer">Printer / Pencetak</option>
         <option value="Network">Network / Rangkaian</option>
         <option value="Other">Other / Lain-lain</option>
@@ -324,7 +345,7 @@
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   const translations = {
     en: {
-      title: '📱 Send Your Device',
+      title: 'Send Your Device',
       subtitle: 'Fill in the form below and we\'ll contact you for a free check-up.',
       name: 'Full Name',
       phone: 'Phone Number',
@@ -344,7 +365,7 @@
       required: '*'
     },
     ms: {
-      title: '📱 Hantar Peranti Anda',
+      title: 'Hantar Peranti Anda',
       subtitle: 'Isi borang di bawah dan kami akan hubungi anda untuk pemeriksaan percuma.',
       name: 'Nama Penuh',
       phone: 'Nombor Telefon',
