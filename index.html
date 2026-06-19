@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Synotech – Send Your Device</title>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: SF Pro (Inter) & DM Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Inter:wght@600;700&display=swap" rel="stylesheet" />
@@ -24,7 +24,7 @@
       width: 100%;
       font-family: 'DM Sans', sans-serif;
       color: #294582;
-      background: #F9FBFE; /* Updated to match iframe background */
+      background: #f0f0f0; /* exactly as specified */
     }
 
     body {
@@ -34,22 +34,22 @@
       padding: 1.5rem;
     }
 
-    /* ── Glassmorphism Card ── */
+    /* ── Glassmorphism Card (Product Card) ── */
     .glass-card {
       max-width: 36rem;
       width: 100%;
       padding: 2.5rem 2.25rem;
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.65); /* semi-transparent white for glass */
       backdrop-filter: blur(14px) saturate(180%);
       -webkit-backdrop-filter: blur(14px) saturate(180%);
-      border-radius: 1.875rem;
+      border-radius: 30px; /* exactly 30px */
       border: 1px solid rgba(255, 255, 255, 0.5);
-      box-shadow: 0 0.75rem 2.5rem rgba(0, 0, 0, 0.12);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12); /* medium shadow */
       transition: box-shadow 0.3s ease;
     }
 
     .glass-card:hover {
-      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.16);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.16);
     }
 
     /* ── Logo ── */
@@ -64,7 +64,7 @@
       display: inline-block;
     }
 
-    /* ── Typography ── */
+    /* ── Subtitle ── */
     .subtitle {
       font-size: 0.9375rem;
       color: #294582;
@@ -73,6 +73,7 @@
       margin-bottom: 1.75rem;
       font-weight: 400;
       line-height: 1.4;
+      font-family: 'DM Sans', sans-serif;
     }
 
     /* ── Language Slider Toggle ── */
@@ -92,6 +93,7 @@
       transition: opacity 0.3s ease;
       cursor: pointer;
       user-select: none;
+      font-family: 'DM Sans', sans-serif;
     }
 
     .toggle-label.active {
@@ -102,7 +104,7 @@
       width: 3.75rem;  /* 60px */
       height: 1.875rem; /* 30px */
       background: #cbd5e0;
-      border-radius: 1.875rem;
+      border-radius: 30px; /* fully rounded */
       position: relative;
       cursor: pointer;
       transition: background 0.3s ease;
@@ -126,7 +128,7 @@
     }
 
     .toggle-switch.active .toggle-slider {
-      transform: translateX(1.875rem); /* moves to the right */
+      transform: translateX(1.875rem);
     }
 
     /* ── Form Fields ── */
@@ -138,9 +140,10 @@
       display: block;
       font-weight: 600;
       font-size: 0.875rem;
-      color: #294582;
+      color: #294582; /* label text color */
       margin-bottom: 0.3125rem;
       letter-spacing: 0.0125rem;
+      font-family: 'DM Sans', sans-serif;
     }
 
     .form-group label .required {
@@ -154,7 +157,7 @@
       width: 100%;
       padding: 0.75rem 1rem;
       border: 0.125rem solid rgba(41, 69, 130, 0.15);
-      border-radius: 1.875rem;
+      border-radius: 30px; /* exactly 30px */
       font-size: 0.9375rem;
       font-family: 'DM Sans', sans-serif;
       background: rgba(255, 255, 255, 0.6);
@@ -181,7 +184,7 @@
     .form-group textarea {
       resize: vertical;
       min-height: 5.625rem;
-      border-radius: 1.5rem;
+      border-radius: 30px; /* keep consistent */
     }
 
     .form-group select {
@@ -196,10 +199,10 @@
     .submit-btn {
       width: 100%;
       padding: 0.9375rem;
-      background: #294582;
-      color: #f0f0f0;
+      background: #294582; /* button background */
+      color: #f0f0f0; /* button text */
       border: none;
-      border-radius: 1.875rem;
+      border-radius: 30px; /* 30px */
       font-size: 1.125rem;
       font-weight: 700;
       font-family: 'DM Sans', sans-serif;
@@ -229,19 +232,21 @@
       color: rgba(41, 69, 130, 0.7);
       margin-top: 0.875rem;
       font-weight: 400;
+      font-family: 'DM Sans', sans-serif;
     }
 
     /* ── Status Messages ── */
     #status {
       margin-top: 1.125rem;
       padding: 0.75rem 1.125rem;
-      border-radius: 1.875rem;
+      border-radius: 30px;
       font-weight: 500;
       font-size: 0.875rem;
       display: none;
       text-align: center;
       backdrop-filter: blur(4px);
       width: 100%;
+      font-family: 'DM Sans', sans-serif;
     }
 
     #status.success {
@@ -287,7 +292,7 @@
 
   <div class="glass-card">
 
-    <!-- ─── Logo ─── -->
+    <!-- Logo -->
     <div class="logo-wrapper">
       <img
         src="https://hitpay-production.s3.ap-southeast-1.amazonaws.com/logos/logo-blue-follow-shape-6a2db3e7ac364.png"
@@ -295,10 +300,10 @@
       />
     </div>
 
-    <!-- ─── Subtitle (title removed) ─── -->
+    <!-- Subtitle (title removed) -->
     <p class="subtitle" id="pageSubtitle">Fill in the form below and we'll contact you for a free check-up.</p>
 
-    <!-- ─── Language Slider Toggle ─── -->
+    <!-- Language Slider Toggle -->
     <div class="toggle-container">
       <span class="toggle-label active" id="labelEn">EN</span>
       <div class="toggle-switch active" id="langToggle" onclick="toggleLanguage()">
@@ -307,7 +312,7 @@
       <span class="toggle-label" id="labelMs">MS</span>
     </div>
 
-    <!-- ─── Form ─── -->
+    <!-- Form -->
     <form id="customerForm" onsubmit="submitForm(event)">
 
       <div class="form-group">
@@ -349,9 +354,7 @@
     <div id="status"></div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════ -->
-  <!--  SUPABASE + FORM LOGIC                            -->
-  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- ─── Supabase + Form Logic ─── -->
   <script>
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     //  🔐  YOUR SUPABASE CREDENTIALS
