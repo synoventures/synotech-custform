@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Synotech – Send Your Device</title>
 
-  <!-- Google Fonts: SF Pro (Inter) & DM Sans -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Inter:wght@600;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* ── Reset & Base ── */
+    /* ── Reset & Full‑Page Glass Base ── */
     * {
       margin: 0;
       padding: 0;
@@ -24,7 +24,7 @@
       width: 100%;
       font-family: 'DM Sans', sans-serif;
       color: #294582;
-      background: #f0f0f0; /* exactly as specified */
+      background: #f0f0f0; /* fallback */
     }
 
     body {
@@ -32,30 +32,28 @@
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
-    }
 
-    /* ── Glassmorphism Card (Product Card) ── */
-    .glass-card {
-      max-width: 36rem;
-      width: 100%;
-      padding: 2.5rem 2.25rem;
-      background: rgba(255, 255, 255, 0.65); /* semi-transparent white for glass */
+      /* ── Full‑page glassmorphism ── */
+      background: rgba(255, 255, 255, 0.55);
       backdrop-filter: blur(14px) saturate(180%);
       -webkit-backdrop-filter: blur(14px) saturate(180%);
-      border-radius: 30px; /* exactly 30px */
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12); /* medium shadow */
-      transition: box-shadow 0.3s ease;
+      border: none;
+      box-shadow: none;
     }
 
-    .glass-card:hover {
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.16);
+    /* ── Content wrapper (centred, limited width) ── */
+    .content {
+      max-width: 36rem;  /* ~576px */
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     /* ── Logo ── */
     .logo-wrapper {
       text-align: center;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
 
     .logo-wrapper img {
@@ -73,7 +71,6 @@
       margin-bottom: 1.75rem;
       font-weight: 400;
       line-height: 1.4;
-      font-family: 'DM Sans', sans-serif;
     }
 
     /* ── Language Slider Toggle ── */
@@ -93,7 +90,6 @@
       transition: opacity 0.3s ease;
       cursor: pointer;
       user-select: none;
-      font-family: 'DM Sans', sans-serif;
     }
 
     .toggle-label.active {
@@ -104,7 +100,7 @@
       width: 3.75rem;  /* 60px */
       height: 1.875rem; /* 30px */
       background: #cbd5e0;
-      border-radius: 30px; /* fully rounded */
+      border-radius: 1.875rem;
       position: relative;
       cursor: pointer;
       transition: background 0.3s ease;
@@ -116,7 +112,7 @@
     }
 
     .toggle-slider {
-      width: 1.625rem;  /* 26px */
+      width: 1.625rem;
       height: 1.625rem;
       background: white;
       border-radius: 50%;
@@ -134,16 +130,16 @@
     /* ── Form Fields ── */
     .form-group {
       margin-bottom: 1.125rem;
+      width: 100%;
     }
 
     .form-group label {
       display: block;
       font-weight: 600;
       font-size: 0.875rem;
-      color: #294582; /* label text color */
+      color: #294582;
       margin-bottom: 0.3125rem;
       letter-spacing: 0.0125rem;
-      font-family: 'DM Sans', sans-serif;
     }
 
     .form-group label .required {
@@ -157,7 +153,7 @@
       width: 100%;
       padding: 0.75rem 1rem;
       border: 0.125rem solid rgba(41, 69, 130, 0.15);
-      border-radius: 30px; /* exactly 30px */
+      border-radius: 1.875rem;
       font-size: 0.9375rem;
       font-family: 'DM Sans', sans-serif;
       background: rgba(255, 255, 255, 0.6);
@@ -184,7 +180,7 @@
     .form-group textarea {
       resize: vertical;
       min-height: 5.625rem;
-      border-radius: 30px; /* keep consistent */
+      border-radius: 1.875rem;
     }
 
     .form-group select {
@@ -199,10 +195,10 @@
     .submit-btn {
       width: 100%;
       padding: 0.9375rem;
-      background: #294582; /* button background */
-      color: #f0f0f0; /* button text */
+      background: #294582;
+      color: #f0f0f0;
       border: none;
-      border-radius: 30px; /* 30px */
+      border-radius: 1.875rem;
       font-size: 1.125rem;
       font-weight: 700;
       font-family: 'DM Sans', sans-serif;
@@ -232,21 +228,19 @@
       color: rgba(41, 69, 130, 0.7);
       margin-top: 0.875rem;
       font-weight: 400;
-      font-family: 'DM Sans', sans-serif;
     }
 
     /* ── Status Messages ── */
     #status {
       margin-top: 1.125rem;
       padding: 0.75rem 1.125rem;
-      border-radius: 30px;
+      border-radius: 1.875rem;
       font-weight: 500;
       font-size: 0.875rem;
       display: none;
       text-align: center;
       backdrop-filter: blur(4px);
       width: 100%;
-      font-family: 'DM Sans', sans-serif;
     }
 
     #status.success {
@@ -275,9 +269,6 @@
       body {
         padding: 1rem;
       }
-      .glass-card {
-        padding: 1.75rem 1.125rem;
-      }
       .submit-btn {
         font-size: 1rem;
         padding: 0.8125rem;
@@ -290,7 +281,7 @@
 </head>
 <body>
 
-  <div class="glass-card">
+  <div class="content">
 
     <!-- Logo -->
     <div class="logo-wrapper">
@@ -313,7 +304,7 @@
     </div>
 
     <!-- Form -->
-    <form id="customerForm" onsubmit="submitForm(event)">
+    <form id="customerForm" onsubmit="submitForm(event)" style="width:100%;">
 
       <div class="form-group">
         <label id="lblName">Full Name <span class="required">*</span></label>
